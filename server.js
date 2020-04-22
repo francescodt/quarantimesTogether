@@ -71,18 +71,6 @@ function getQuote(req, res) {
     handleError(err, req, res));
 }
 
-//map function for rendering location on results page in a google map
-function createMap(id, latX, latY) {
-    var mapProp= {
-      center:new google.maps.LatLng(latX, latY),
-      zoom:15,
-    };
-  new google.maps.Map(document.getElementById(id), mapProp);
-}
-function createMaps() {
-  createMap('googleMap1', 47.608638, -122.340138);
-  createMap('googleMap2', 47.443638, -122.300444);
-  
 function getCovidData(req, res) {
   let url = 'https://api.covid19api.com/country/'
   //https://api.covid19api.com/country/south-africa?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z
