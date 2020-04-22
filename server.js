@@ -66,8 +66,19 @@ function getQuote(req, res) {
     res.render('pages/submission', {quotes: quotes});
   }).catch(err =>
     handleError(err, req, res));
-  
+}
 
+//map function for rendering location on results page in a google map
+function createMap(id, latX, latY) {
+    var mapProp= {
+      center:new google.maps.LatLng(latX, latY),
+      zoom:15,
+    };
+  new google.maps.Map(document.getElementById(id), mapProp);
+}
+function createMaps() {
+  createMap('googleMap1', 47.608638, -122.340138);
+  createMap('googleMap2', 47.443638, -122.300444);
 }
 
 
