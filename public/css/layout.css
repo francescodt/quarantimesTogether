@@ -1,7 +1,25 @@
 body {
-    background-image: url("/public/images/clouds.webp");
+    background-image: url("/images/clouds2.png");
 }
 
 header {
     font-family: 'Parisienne', cursive;
+    font-size: 60px;
+    font-weight: 600;
+    text-shadow: 2px 2px rgb(238, 215, 7)
 }
+
+a:link, a:visited {
+    /* background-color: darkgrey; */
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: x-large;
+}
+
+a:hover, a:active {
+    background-color: rgb(233, 182, 16);
+  }
+  

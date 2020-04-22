@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "jquery": "^3.5.0",
     "pg": "^8.0.2",
+    "postgres": "^1.0.2",
     "superagent": "^5.2.2"
   },
   "devDependencies": {

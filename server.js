@@ -42,9 +42,12 @@ app.get('/views/pages/stories', (req, res) => {
 app.get('/views/pages/aboutUs', (req, res) => {
     res.render('pages/aboutUs');
   });
-app.get('/views/pages/searches', (req, res) => {
+app.get('/views/pages/search', (req, res) => {
     res.render('pages/search');
   });
+app.get('/views/pages/results', (req, res) => {
+  getCovidData(req, res);
+})
 app.post('/views/pages/submission', submitStory);
 
 
@@ -79,8 +82,34 @@ function createMap(id, latX, latY) {
 function createMaps() {
   createMap('googleMap1', 47.608638, -122.340138);
   createMap('googleMap2', 47.443638, -122.300444);
+  
+function getCovidData(req, res) {
+  let url = 'https://api.covid19api.com/country/'
+  //https://api.covid19api.com/country/south-africa?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z
+  let qString = `${req.query.country}?from=${req.query.startDate}T00:00:00Z&to=${req.query.endDate}T00:00:00Z`
+  // console.log(`the country was ${req.query.country}`);
+  // console.log(`the start date was ${req.query.startDate}`);
+  // console.log(`the end date was ${req.query.endDate}`);
+  url = url + qString;
+  console.log(url);
+  superagent.get(url).then(covidResponse => {
+    // console.log(covidResponse.body);
+    let cases = covidResponse.body.map(dayData => {
+      let data = new ConfirmedCases(dayData);
+      return data;
+    });
+    console.log(cases);
+    res.render('pages/results', {cases : cases});
+  }).catch(err =>
+    handleError(err, req, res));
 }
 
+
+function ConfirmedCases(covidData) {
+  this.country = covidData.Country;
+  this.confirmed = covidData.Confirmed;
+  this.date = covidData.Date;
+}
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
 

@@ -13,7 +13,18 @@
     <%- include('../layout/header') %>
 
   </header>
-
+  <h2>Search for confirmed cases by country for a range of dates</h2>
+  <form action="/views/pages/results" method="GET">
+    <legend>
+      <label for="country">Select A Country</label>
+      <input type="text" name="country" />
+      <label for="startDate">Start Date</label>
+      <input type="date" name="startDate" />
+      <label for="endDate">End Date</label>
+      <input type="date" name="endDate" />
+    </legend>
+    <button type="submit">Search</button>
+  </form>
  
 
 

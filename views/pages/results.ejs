@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <%- include('../layout/head') %>
+  
+</head>
+
+<body>
+  <header id="header">
+
+    <%- include('../layout/header') %>
+
+  </header>
+  
+ 
+
+
+  <main id="main-content">
+    <h2>Results for <%= cases[0].country %></h2>
+    <% cases.forEach(data => {%>
+        <p>Date <%= data.date %></p>
+        <p>Confirmed Cases <%= data.confirmed %></p>
+        <%})%>
+  </main>
+
+  <footer id="footer">
+
+    <%- include('../layout/footer') %>
+
+  </footer>
+</body>
+
+</html>
