@@ -4,7 +4,7 @@
 <head>
 
   <%- include('../layout/head') %>
-  
+
 </head>
 
 <body>
@@ -13,23 +13,24 @@
     <%- include('../layout/header') %>
 
   </header>
-  <h2>Search for confirmed cases by country for a range of dates</h2>
-  <form action="/views/pages/results" method="GET">
-    <legend>
-      <label for="country">Select A Country</label>
-      <input type="text" name="country" />
-      <label for="startDate">Start Date</label>
-      <input type="date" name="startDate" />
-      <label for="endDate">End Date</label>
-      <input type="date" name="endDate" />
-    </legend>
-    <button type="submit">Search</button>
-  </form>
- 
 
 
   <main id="main-content">
-    
+    <h2>Search for confirmed cases by country for a range of dates</h2>
+    <form action="/views/pages/results" method="GET">
+      <legend>
+        <label for="country">Select A Country</label>
+        <input type="text" autocomplete="off" name="country" />
+        <label for="startDate">Start Date</label>
+        <input type="date" autocomplete="off" name="startDate" />
+        <label for="endDate">End Date</label>
+        <input type="date" autocomplete="off" name="endDate" />
+      </legend>
+      <br/>
+      <button type="submit">Search</button>
+    </form>
+
+
   </main>
 
   <footer id="footer">

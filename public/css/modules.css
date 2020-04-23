@@ -10,11 +10,11 @@ label {
 
 input.input-box, textarea { 
     background: lightgrey;
+    color: black;
 }
 
 #submit {
     display: block;
-    color:  rgb(62, 11, 202);
     font-weight: 400;
     background-color: burlywood;
 }
@@ -29,21 +29,29 @@ body {
 #header {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 30% auto 5%;
+}
+
+#forwrapper {
+    display: grid;
+    grid-template-rows: 10% auto 5%;
+}
+
+#submissionwrapper {
+    grid-row: 2 / 3;
+}
+
+#footer {
+    align-self: center;
 }
 
 
 
 
-/* mobile layout */
-@media(min-width: 600px) {
+
+/*above mobile layout */
+@media(min-width: 641px) {
     
 }
 
 
-
-/*desktop layout*/
-@media(min-width: 768px) {
-    body {
-        background: dodgerblue;
-    }}

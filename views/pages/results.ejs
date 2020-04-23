@@ -3,14 +3,17 @@
 
 <head>
 
-  <%- include('../layout/head') %>
-  
+    <%- include('../layout/head') %>
+
 </head>
 
 <body>
-  <header id="header">
+    <header id="header">
 
-    <%- include('../layout/header') %>
+        <%- include('../layout/header') %>
+
+    </header>
+
 
   </header>
   
@@ -30,19 +33,26 @@ function createMaps() {
 
     </script>
 
-  <main id="main-content">
-    <h2>Results for <%= cases[0].country %></h2>
-    <% cases.forEach(data => {%>
-        <p>Date <%= data.date %></p>
-        <p>Confirmed Cases <%= data.confirmed %></p>
-        <%})%>
-  </main>
 
-  <footer id="footer">
+    <main id="main-content">
+        <h2>Results for <%= country %></h2>
+       <form action="" id="query">
+           <input type="hidden" name="country" value="<%= country %>">
+           <input type="hidden" name="startDate" value="<%= startDate %>">
+           <input type="hidden" name="endDate" value="<%= endDate %>">
+       </form>
+        <canvas id="line-chart" width="800" height="450"></canvas>
+    </main>
 
-    <%- include('../layout/footer') %>
+    <footer id="footer">
 
-  </footer>
+        <%- include('../layout/footer') %>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"
+        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/chart.js"></script>
 </body>
 
 </html>

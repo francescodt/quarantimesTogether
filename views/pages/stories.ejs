@@ -26,6 +26,7 @@
       <option value="inspirational">Inspirational Story</option>
       <option value="random">Random</option>
     </select>
+    <button id="clearFilter">Clear Filters</button>
 
 
     <% stories.forEach(story => { %>
@@ -35,24 +36,9 @@
       <p><%= story.location %></p>
       <p><%= story.category %></p>
       <p><%= story.story %></p>
-    </section>
+    </section><br/>
     <% }) %>
-<script>
-  //event listener
-$('select').change(hideElement);
-let $section = $('<section>').attr('data-keyword', story.category);
 
-//hidey filter gafiltafish
- function hideElement() { 
- let value = $(this).val(); 
- console.log(value);
-  {  
-   $('section').hide();    
-   $(`section.${value}`).slideDown(888); 
-   }                                       
-}
-
-</script>
 
   </main>
 
@@ -61,6 +47,8 @@ let $section = $('<section>').attr('data-keyword', story.category);
     <%- include('../layout/footer') %>
 
   </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="/app.js"></script>
 </body>
 
 
