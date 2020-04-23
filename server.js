@@ -54,6 +54,63 @@ app.get('/chart.json', (req, res) => {
 })
 app.post('/views/pages/submission', submitStory);
 
+//routes for login
+app.get('/register', showRegister);
+app.post('/register', createUser);
+
+app.get('/login', showLogin);
+app.post('/login', doLogin);
+app.post('/logout', doLogout);
+
+//handlers
+function showRegister(req,res){
+    res.render('pages/register');
+}
+
+function showLogin(req,res){
+    res.render('pages/login');
+}
+
+function doLogin(req,res){
+    const { username } = req.body;
+    const SQL =
+        SELECT id, username FROM users
+        WHERE username = $1;
+        ;
+       client.query(SQL, [username])
+        .then(results => {
+            let { rows } = results;
+            let user = rows[0];
+
+            if (!user) {
+                res.status(400)
+                    .render('pages/error-view', { error: 'User not found!' });
+                return;
+            }
+
+            response.cookie('user', JSON.stringify(user));
+            response.redirect('/');
+        })
+}
+
+function doLogout(req,res){
+    res.clearCookie('user');
+    res.redirect('/');
+}
+
+function createUser(req,res){
+    const { username } = req.body;
+    const SQL =
+        INSERT INTO users (username)
+        VALUES ($1)
+        ;
+       client.query(SQL, [username])
+        .then(results => {
+            res.redirect('/');
+        })
+        .catch(err=> handleError(err,response));
+}
+
 
 // submit the story
 function submitStory(req, res) {
