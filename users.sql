@@ -3,13 +3,14 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(100) NOT NULL UNIQUE
 );
 
-ALTER TABLE tasks
+ALTER TABLE stories
     ADD COLUMN user_id INT;
 
 INSERT INTO users (username)
 VALUES ('scott');
 
-UPDATE tasks SET user_id = 1;
+UPDATE stories SET user_id = 1;
 
-ALTER TABLE tasks ADD CONSTRAINT fk_user_id
+ALTER TABLE stories ADD CONSTRAINT fk_user_id
 FOREIGN KEY (user_id) REFERENCES users(id);
+             
