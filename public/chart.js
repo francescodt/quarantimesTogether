@@ -11,10 +11,10 @@ $.ajax('/chart.json', ajaxSettings)
   .then(function (data) {
     console.log(data);
     let dataLabels = data.map(entry => {
-      return entry.label;
+      return entry.date;
     })
     let dataCases = data.map(entry => {
-     return entry.data;
+     return entry.confirmed;
     })
     console.log(dataLabels);
     console.log(dataCases);
