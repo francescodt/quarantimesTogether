@@ -1,44 +1,15 @@
-#gridwrapper {
-    display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: 25% 25% 25% 20% 5%;
-    grid-gap: 6rem;
-    min-height: 100%;
-}
-
-.submission {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-}
-
-.stories {
-    grid-column: 2 / 3;
-    grid-row: 2 / 3;
-}
-
-.search {
-    grid-column: 1 / 2;
-    grid-row: 3 / 4;
-
-}
-
-.aboutUs {
-    grid-column: 2 / 3;
-    grid-row: 3 / 4;
-
-}
-
-
-
-
 label {
     margin-top: 20px;
     margin-bottom: 20px;
     display: block;
-    margin-left: 5px;
-    margin-right: 5px;
+    /* margin-left: 5px;
+    margin-right: 5px; */
     font-size: large;
     font-family: cursive;
+}
+
+input.input-box, textarea { 
+    background: lightgrey;
 }
 
 #submit {
@@ -48,23 +19,25 @@ label {
     background-color: burlywood;
 }
 
-input.input-box, textarea { 
-    background: lightgrey;
+body {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 25% auto 5%;
+
 }
+
+#header {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 40% 60%;
+}
+
+
+
 
 /* mobile layout */
 @media(min-width: 600px) {
-    body {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px 1fr));
-        grid-template-rows: auto;
-        grid-gap: 1rem;
-    }
-
-    #main-content {
-        grid-column: 1 / 4;
-        
-    }
+    
 }
 
 

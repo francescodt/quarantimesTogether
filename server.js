@@ -3,7 +3,7 @@
 
 // Load Environment Variables from the .env file
 require('dotenv').config();
-let $ = require('jQuery');
+let $ = require('jquery');
 
 
 // Application Dependencies
@@ -82,21 +82,28 @@ function getCovidData(req, res) {
   console.log(url);
   superagent.get(url).then(covidResponse => {
     // console.log(covidResponse.body);
+    confirmedNumbers =[];
+    dateRange = [];
     let cases = covidResponse.body.map(dayData => {
       let data = new ConfirmedCases(dayData);
       return data;
     });
-    console.log(cases);
+    console.log(confirmedNumbers);
+    console.log(dateRange);
     res.render('pages/results', {cases : cases});
   }).catch(err =>
     handleError(err, req, res));
 }
 
-
+let confirmedNumbers =[];
+let dateRange = [];
 function ConfirmedCases(covidData) {
   this.country = covidData.Country;
   this.confirmed = covidData.Confirmed;
-  this.date = covidData.Date;
+  confirmedNumbers.push(parseInt(covidData.Confirmed));
+  this.date = new Date(Date.parse(covidData.Date)).toDateString();
+  dateRange.push(new Date(Date.parse(covidData.Date)).toDateString());
+  
 }
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

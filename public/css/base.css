@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    color: white;
+    text-shadow: 1px 1px black;
 }
 
 html, body {

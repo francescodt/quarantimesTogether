@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+html, body {
+    min-width: 360px;
+    margin: 0 auto;
+    text-align: center;
+    height: 100%;
+}
+
+header {
+    height: 0;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    font-family: 'Parisienne', cursive;
+    font-size: 60px;
+    font-weight: 600;
+    text-shadow: 2px 2px rgb(238, 215, 7)
+}
+
+main {
+    width: 95%;
+}
+
+body {
+    background-image: url("/images/peacefulSetting.jpeg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+a:link, a:visited {
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: x-large;
+}
+
+a:hover, a:active {
+    background-color: rgb(233, 182, 16);
+  }
+
+
+#gridwrapper {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 10% repeat(4, 20%) 10%;
+}
+
+.submission {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.stories {
+    grid-column: 2 / 2;
+    grid-row: 3 / 4;
+}
+
+.search {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+
+}
+
+.aboutUs {
+    grid-column: 2 / 2;
+    grid-row: 5 / 6;
+
+}
+
+body {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 25% auto 10%;
+
+}
+
+#main-content {
+    display: grid;
+
+}
+
+
+#footer {
+    align-self: center;
+}
