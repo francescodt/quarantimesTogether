@@ -119,9 +119,14 @@ function createUser(req,res){
     const SQL =
         INSERT INTO users (username)
         VALUES ($1)
+        RETURNING id, username;
         ;
        client.query(SQL, [username])
         .then(results => {
+            let { rows } = results;
+            let user = rows[0];
+
+            res.cookie('user', JSON.stringify(user));
             res.redirect('/');
         })
         .catch(err=> handleError(err,response));
