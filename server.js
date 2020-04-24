@@ -28,8 +28,8 @@ app.use(cookieParser());
 app.use((req,res,next)=> {
     try {
         const { user } = req.cookies;
-        console.log('user',req.user);
         req.user = user && JSON.parse(user) || {};
+        console.log('user',req.user);
     }
     catch (err) {
         console.warn('error parsing user cookie', err);
@@ -71,28 +71,28 @@ app.get('/chart.json', (req, res) => {
 app.post('/views/pages/submission', submitStory);
 
 //routes for login
-app.get('/register', showRegister);
-app.post('/register', createUser);
+app.get('/views/pages/register', showRegister);
+app.post('/views/pages/register', createUser);
 
-app.get('/login', showLogin);
-app.post('/login', doLogin);
+app.get('/views/pages/login', showLogin);
+app.post('/views/pages/login', doLogin);
 app.post('/logout', doLogout);
 
 //handlers
 function showRegister(req,res){
-    res.render('pages/register');
+    res.render('views/pages/register');
 }
 
 function showLogin(req,res){
-    res.render('pages/login');
+    res.render('views/pages/login');
 }
 
 function doLogin(req,res){
     const { username } = req.body;
     const SQL =
-        SELECT id, username FROM users
+        `SELECT id, username FROM users
         WHERE username = $1;
-        ;
+        `;
        client.query(SQL, [username])
         .then(results => {
             let { rows } = results;
@@ -104,8 +104,8 @@ function doLogin(req,res){
                 return;
             }
 
-            response.cookie('user', JSON.stringify(user));
-            response.redirect('/');
+            res.cookie('user', JSON.stringify(user));
+            res.redirect('/');
         })
 }
 
@@ -117,10 +117,10 @@ function doLogout(req,res){
 function createUser(req,res){
     const { username } = req.body;
     const SQL =
-        INSERT INTO users (username)
+        `INSERT INTO users (username) 
         VALUES ($1)
-        RETURNING id, username;
-        ;
+        RETURNING id, username
+        `;
        client.query(SQL, [username])
         .then(results => {
             let { rows } = results;
