@@ -8,6 +8,7 @@ let $ = require('jquery');
 
 // Application Dependencies
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const fs = require('fs');
 const superagent = require('superagent');
@@ -23,6 +24,21 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors()); //middleware
 app.use(express.static('public'));
+app.use(cookieParser());
+app.use((req,res,next)=> {
+    try {
+        const { user } = req.cookies;
+        console.log('user',req.user);
+        req.user = user && JSON.parse(user) || {};
+    }
+    catch (err) {
+        console.warn('error parsing user cookie', err);
+        req.user = {};
+    }
+    res.locals.user = req.user;
+
+    next();
+});
 
 //view engine/templating
 app.set('view engine', 'ejs');
