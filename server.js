@@ -8,6 +8,7 @@ let $ = require('jquery');
 
 // Application Dependencies
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const fs = require('fs');
 const superagent = require('superagent');
@@ -23,6 +24,21 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors()); //middleware
 app.use(express.static('public'));
+app.use(cookieParser());
+app.use((req,res,next)=> {
+    try {
+        const { user } = req.cookies;
+        console.log('user',req.user);
+        req.user = user && JSON.parse(user) || {};
+    }
+    catch (err) {
+        console.warn('error parsing user cookie', err);
+        req.user = {};
+    }
+    res.locals.user = req.user;
+
+    next();
+});
 
 //view engine/templating
 app.set('view engine', 'ejs');
@@ -53,6 +69,68 @@ app.get('/chart.json', (req, res) => {
   getCovidData(req, res);
 })
 app.post('/views/pages/submission', submitStory);
+
+//routes for login
+app.get('/register', showRegister);
+app.post('/register', createUser);
+
+app.get('/login', showLogin);
+app.post('/login', doLogin);
+app.post('/logout', doLogout);
+
+//handlers
+function showRegister(req,res){
+    res.render('pages/register');
+}
+
+function showLogin(req,res){
+    res.render('pages/login');
+}
+
+function doLogin(req,res){
+    const { username } = req.body;
+    const SQL =
+        SELECT id, username FROM users
+        WHERE username = $1;
+        ;
+       client.query(SQL, [username])
+        .then(results => {
+            let { rows } = results;
+            let user = rows[0];
+
+            if (!user) {
+                res.status(400)
+                    .render('pages/error-view', { error: 'User not found!' });
+                return;
+            }
+
+            response.cookie('user', JSON.stringify(user));
+            response.redirect('/');
+        })
+}
+
+function doLogout(req,res){
+    res.clearCookie('user');
+    res.redirect('/');
+}
+
+function createUser(req,res){
+    const { username } = req.body;
+    const SQL =
+        INSERT INTO users (username)
+        VALUES ($1)
+        RETURNING id, username;
+        ;
+       client.query(SQL, [username])
+        .then(results => {
+            let { rows } = results;
+            let user = rows[0];
+
+            res.cookie('user', JSON.stringify(user));
+            res.redirect('/');
+        })
+        .catch(err=> handleError(err,response));
+}
 
 
 // submit the story

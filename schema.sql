@@ -8,4 +8,4 @@ CREATE TABLE stories (
   category VARCHAR(255)
 );
 
-INSERT INTO stories (name,location,story,category) VALUES('billy','texas','I cannot believe this corona thing at tall cuz i dont even drink that mexican beer no siree.','Gripes');
+INSERT INTO stories (name,location,story,category) VALUES('billy','texas','I cannot believe this corona thing at tall cuz i dont even drink that mexican beer no siree.','random');

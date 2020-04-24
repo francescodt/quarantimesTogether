@@ -1,5 +1,10 @@
 <header id="header">
+ 
+  <% if (user.id) { %>
+  <h2>Welcome, <% user.username %></h2>
+  <% } %>
 
+  <h1></h1>
   <nav id="site-nav">
     <div id="menuToggle">
       <input type="checkbox" />
